@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Registro de bilioteca {% endblock %}
+
+{% block body %}
+    {% for message in app.flashes('exito') %}
+        <div class="alert alert-success">
+            {{message}}
+        </div>
+    {% endfor %}
+    {{form(formularioBiblioteca)}}
+{% endblock %}
