@@ -18,7 +18,15 @@ class BibliotecaRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Biblioteca::class);
     }
-
+    
+    public function BuscarTodasLasBibliotecas() {
+        return $this->getEntityManager()
+        ->createQuery(dql: '
+        SELECT biblio.id, biblio.nombre, biblio.num_trabajadores, biblio.direccion, biblio.fecha_fundacion 
+        From App:biblioteca biblio
+        ')->getResult();
+        
+    }
     // /**
     //  * @return Biblioteca[] Returns an array of Biblioteca objects
     //  */
