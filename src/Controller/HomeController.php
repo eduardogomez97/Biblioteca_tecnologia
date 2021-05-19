@@ -13,7 +13,7 @@ class HomeController extends AbstractController
     public function index(): Response
     {
         $em = $this->getDoctrine()->getManager();
-        //$showbibliotecas = $em->getRepository(className: Biblioteca::class)-> BuscarTodosLosPost() ;
+        //$showbibliotecas = $em->getRepository(className: Biblioteca::class)-> BuscarTodosLosPost() ; VER PORQUÉ NO DETECTA LA FUNCION
         $showbibliotecas = $em->getRepository(Biblioteca::class)->findAll();
         return $this->render('home/index.html.twig', [
             'controller_name' => 'Bienvenido a la Home',
