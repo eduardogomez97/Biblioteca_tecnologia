@@ -3,21 +3,28 @@
 namespace App\Controller;
 
 use App\Entity\Biblioteca;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 class HomeController extends AbstractController
 {
-    #[Route('/home', name: 'home')]
-    public function index(): Response
+    #[Route('/', name: 'home')]
+    public function index(PaginatorInterface $paginator, Request $request): Response
     {
         $em = $this->getDoctrine()->getManager();
-        //$showbibliotecas = $em->getRepository(className: Biblioteca::class)-> BuscarTodosLosPost() ; VER PORQUÉ NO DETECTA LA FUNCION
-        $showbibliotecas = $em->getRepository(Biblioteca::class)->findAll();
+        //$query = $em->getRepository(className: Biblioteca::class)-> BuscarTodosLosPost() ; VER PORQUÉ NO DETECTA LA FUNCION
+        $query = $em->getRepository(Biblioteca::class)->findAll();
+        $pagination = $paginator->paginate(
+            $query, /* query NOT result */
+            $request->query->getInt('page', 1), /*page number*/
+            10 /*limit per page*/
+        );
         return $this->render('home/index.html.twig', [
             'controller_name' => 'Bienvenido a la Home',
-            'showbibliotecas' => $showbibliotecas
+            'pagination' => $pagination
             
         ]);
     }
