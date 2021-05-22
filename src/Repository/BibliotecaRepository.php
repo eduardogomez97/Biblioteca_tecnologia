@@ -5,6 +5,7 @@ namespace App\Repository;
 use App\Entity\Biblioteca;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use Doctrine\ORM\Query;
 
 /**
  * @method Biblioteca|null find($id, $lockMode = null, $lockVersion = null)
@@ -23,10 +24,10 @@ class BibliotecaRepository extends ServiceEntityRepository
         return $this->createQueryBuilder('biblio')
         ->select('biblio.id, biblio.nombre, biblio.num_trabajadores, biblio.direccion, biblio.fecha_fundacion ')
         ->getQuery()
-        ->getResult();
-        
-    }
+        ->getResult(Query::HYDRATE_ARRAY);
 
+    }
+    
     /*public function BuscarTodasLasBibliotecas() {
         return $this->getEntityManager()
         ->createQuery(dql: '
