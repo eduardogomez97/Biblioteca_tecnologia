@@ -13,8 +13,8 @@
         <th{% if pagination.isSorted('a.Nombre') %} class="sorted"{% endif %}>
             {{ knp_pagination_sortable(pagination, 'Nombre', 'a.Nombre') }}
         </th>
-        <th{% if pagination.isSorted('a.NumTrabajadores') %} class="sorted"{% endif %}>
-            {{ knp_pagination_sortable(pagination, 'Nº Trabajadores', 'a.NumTrabajadores') }}
+        <th{% if pagination.isSorted('a.num_trabajadores') %} class="sorted"{% endif %}>
+            {{ knp_pagination_sortable(pagination, 'Nº Trabajadores', 'a.num_trabajadores') }}
         </th>
         <th{% if pagination.isSorted('a.direccion') %} class="sorted"{% endif %}>
             {{ knp_pagination_sortable(pagination, 'Dirección', 'a.direccion') }}
@@ -34,9 +34,9 @@
         <tr {% if loop.index is odd %}class="color"{% endif %}>
             <td>{{ article.id }}</td>
             <td>{{ article.nombre}}</td>
-            <td>{{ article.NumTrabajadores}}</td>
+            <td>{{ article.num_trabajadores}}</td>
             <td>{{ article.direccion}}</td>
-            <td>{{ article.FechaFundacion | date('Y-m-d') }}</td>
+            <td>{{ article.fecha_fundacion | date('Y-m-d') }}</td>
         </tr>
     {% endfor %}
 </table>

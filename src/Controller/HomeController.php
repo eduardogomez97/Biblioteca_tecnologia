@@ -15,8 +15,8 @@ class HomeController extends AbstractController
     public function index(PaginatorInterface $paginator, Request $request): Response
     {
         $em = $this->getDoctrine()->getManager();
-        //$query = $em->getRepository(className: Biblioteca::class)-> BuscarTodosLosPost() ; VER PORQUÉ NO DETECTA LA FUNCION
-        $query = $em->getRepository(Biblioteca::class)->findAll();
+        $query = $em->getRepository(Biblioteca::class)-> BuscarTodasLasBibliotecas() ;
+        //$query = $em->getRepository(Biblioteca::class)->findAll();
         $pagination = $paginator->paginate(
             $query, /* query NOT result */
             $request->query->getInt('page', 1), /*page number*/

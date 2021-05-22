@@ -20,13 +20,21 @@ class BibliotecaRepository extends ServiceEntityRepository
     }
     
     public function BuscarTodasLasBibliotecas() {
+        return $this->createQueryBuilder('biblio')
+        ->select('biblio.id, biblio.nombre, biblio.num_trabajadores, biblio.direccion, biblio.fecha_fundacion ')
+        ->getQuery()
+        ->getResult();
+        
+    }
+
+    /*public function BuscarTodasLasBibliotecas() {
         return $this->getEntityManager()
         ->createQuery(dql: '
         SELECT biblio.id, biblio.nombre, biblio.num_trabajadores, biblio.direccion, biblio.fecha_fundacion 
         From App:biblioteca biblio
         ');
         
-    }
+    }*/
 
     // /**
     //  * @return Biblioteca[] Returns an array of Biblioteca objects
