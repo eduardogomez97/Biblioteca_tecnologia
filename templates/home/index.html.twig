@@ -62,8 +62,8 @@
                             <td>{{ article.nombre}}</td>
                             <td>{{ article.num_trabajadores}}</td>
                             <td>{{ article.direccion}}</td>
-                            <td>{{ article.fecha_fundacion | date('Y-m-d') }}</td>
-                            <td><a href="verBiblioteca/{{ article.id }}"><img src="/img/look.png" /></a> <a href="borrarBiblioteca/{{ article.id }}"><img src="/img/delete.png" /></a></td>
+                            <td>{{ article.fecha_fundacion | date('d-m-Y') }}</td>
+                            <td><a href="verBiblioteca/{{ article.id }}"><img src="/img/look.png" /></a> <a href="editarBiblioteca/{{ article.id }}"><img src="/img/editar.png" /></a> <a href="borrarBiblioteca/{{ article.id }}"><img src="/img/delete.png" /></a></td>
                         </tr>
                     {% endfor %}
                 </tbody>

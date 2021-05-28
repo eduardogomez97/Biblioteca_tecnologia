@@ -11,7 +11,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class HomeController extends AbstractController
 {
-    #[Route('/', name: 'home')]
+    #[Route('/dashboard', name: 'inicio')]
     public function index(Request $request): Response
     {
         $em = $this->getDoctrine()->getManager();

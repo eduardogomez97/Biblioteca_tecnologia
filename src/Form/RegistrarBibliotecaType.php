@@ -5,6 +5,7 @@ namespace App\Form;
 use App\Entity\Biblioteca;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -19,7 +20,7 @@ class RegistrarBibliotecaType extends AbstractType
             ->add(child: 'nombre')
             ->add(child: 'num_trabajadores', type: IntegerType::class)
             ->add(child: 'direccion')
-            ->add(child: 'fecha_fundacion', type: DateTimeType::class)
+            ->add(child: 'fecha_fundacion', type: DateType::class)
             ->add(child: 'Registrar', type: SubmitType::class)
         ;
     }

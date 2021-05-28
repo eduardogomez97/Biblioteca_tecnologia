@@ -56,9 +56,7 @@ class BibliotecaController extends AbstractController
             );
         }
         $em->remove($biblioteca);
-        //foreach ($biblioteca as $biblioteca) {
-            //$em->remove($biblioteca);
-        //}
+
         $em->flush();
         return $this->redirectToRoute( route: 'home');
 
@@ -74,16 +72,15 @@ class BibliotecaController extends AbstractController
         $em = $this->getDoctrine()->getManager();
         $biblioteca = $em->getRepository(Biblioteca::class)->find($id);
         $nombre = $biblioteca->getNombre();
+        $ntrabajadores = $biblioteca->getNumTrabajadores();
+        $direction = $biblioteca->getDireccion();
+        $fecha = $biblioteca->getFechaFundacion();
         if($formBiblioteca->isSubmitted() && $formBiblioteca->isValid()) {
             if (!$biblioteca) {
                 throw $this->createNotFoundException(
                     'No existe la biblioteca '.$id
                 );
-            }
-            $nombre = $biblioteca->getNombre();
-            $ntrabajadores = $biblioteca->getNumTrabajadores();
-            $direction = $biblioteca->getDireccion();
-            $fecha = $biblioteca->getFechaFundacion();
+            }           
             $biblioteca->setNombre($nombre);
             $biblioteca->setNumTrabajadores($ntrabajadores);
             $biblioteca->setDireccion($direction);
@@ -95,11 +92,10 @@ class BibliotecaController extends AbstractController
         }
         return $this->render('biblioteca/editarBiblioteca.html.twig', [
             'formularioeditarBiblioteca' =>$formBiblioteca->createView(),
-            'nombre_biblioteca' => $nombre
-            //'ntrabajadores' =>  $ntrabajadores,
-            //'direction' => $direction,
-            //'fecha' => $fecha
-
+            'nombre_biblioteca' => $nombre,
+            'ntrabajadores' => $ntrabajadores,
+            'direction' => $direction,
+            'fecha' => $fecha
         ]);
         
     }
