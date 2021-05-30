@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Log in!{% endblock %}
+{% block title %}Inicio{% endblock %}
 
 {% block body %}
 <form method="post">
@@ -10,33 +10,55 @@
 
     {% if app.user %}
         <div class="mb-3">
-            You are logged in as {{ app.user.username }}, <a href="{{ path('app_logout') }}">Logout</a>
+            <h1>Bienvenido {{ app.user.username }}
         </div>
-    {% endif %}
+        <div class="mb-3">
+            En este proyecto puedes gestionar un grupo de bibliotecas así como los libros que hay registrados en cada una de ellas.
+            <br>
+            Tienes diversas funcionalidades:
+            <ul>
+                <li>Crear nuevas bibliotecas <span class="badge bg-success">Hecho</span></li>
+                <li>Visualizar todas las bibliotecas <span class="badge bg-success">Hecho</span></li>
+                <li>Ver una viblioteca en concreto <span class="badge bg-warning text-dark">Pendiente de mejorar</span></li>
+                <li>Borrar una biblioteca <span class="badge bg-success">Hecho</span></li>
+                <li>Editar una viblioteca ya existente <span class="badge bg-success">Hecho</span></li>
+                <li>Ver los libros que tiene una bilioteca en concreto</li>
+                <li>Modificar la información de un libro en concreto</li>
+                <li>Borrar un libro en concreto</li>
+                <li>Añadir nuevos libros</li>
+            </ul>
 
-    <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
-    <label for="inputEmail">Email</label>
-    <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" autocomplete="email" required autofocus>
-    <label for="inputPassword">Password</label>
-    <input type="password" name="password" id="inputPassword" class="form-control" autocomplete="current-password" required>
+        </div>
+        <div class="mb-3">
+            Ya tienes permisos para acceder a las <a href="/dashboard">bibliotecas</a>.
+        </div>
+    
+    {% else %}
+        <h1 class="h3 mb-3 font-weight-normal">Porfavor, inicia sesión</h1>
+        <label for="inputEmail">Email</label>
+        <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" autocomplete="email" required autofocus>
+        <br>
+        <label for="inputPassword">Contraseña</label>
+        <input type="password" name="password" id="inputPassword" class="form-control" autocomplete="current-password" required>
 
-    <input type="hidden" name="_csrf_token"
-           value="{{ csrf_token('authenticate') }}"
-    >
+        <input type="hidden" name="_csrf_token"
+            value="{{ csrf_token('authenticate') }}"
+        >
 
-    {#
-        Uncomment this section and add a remember_me option below your firewall to activate remember me functionality.
-        See https://symfony.com/doc/current/security/remember_me.html
+        {#
+            Uncomment this section and add a remember_me option below your firewall to activate remember me functionality.
+            See https://symfony.com/doc/current/security/remember_me.html#}
 
         <div class="checkbox mb-3">
             <label>
-                <input type="checkbox" name="_remember_me"> Remember me
+                <input type="checkbox" name="_remember_me"> Recuerdame
             </label>
         </div>
-    #}
-
-    <button class="btn btn-lg btn-primary" type="submit">
-        Sign in
-    </button>
+        
+        <br>
+        <button class="btn btn-lg btn-primary" type="submit">
+            Iniciar sesión
+        </button>
+    {% endif %}
 </form>
 {% endblock %}

@@ -21,15 +21,26 @@
             <div class="form-row">
                 <div class="col-md-6 mb-3">
                     {{ form_row(formularioeditarBiblioteca.nombre, {
-                        'attr': {'class': 'form-control','placeholder': nombre_biblioteca},
-                        'label': ' ',
+                        'attr': {
+                            'class': 'form-control',
+                            'placeholder': 'Nombre de la biblioteca', 
+                            'empty_data': nombre_biblioteca,
+                            'value' : nombre_biblioteca
+                        },
+                        'label': ' '
+                        
                         }) 
                     }}
                 </div>  
                 <div class="col-md-6 mb-3">
                     {{ form_row(formularioeditarBiblioteca.num_trabajadores, {
-                        'attr': {'class': 'form-control','placeholder': ntrabajadores},
-                        'label': ' ',
+                        'attr': {
+                            'class': 'form-control',
+                            'placeholder': 'Número de trabajadores',
+                            'empty_data': ntrabajadores,
+                            'value' : ntrabajadores
+                        },
+                        'label': ' '
                         }) 
                     }}
                 </div> 
@@ -37,14 +48,24 @@
             <div class="form-row">
                 <div class="col-md-6 mb-3">
                     {{ form_row(formularioeditarBiblioteca.direccion, {
-                        'attr': {'class': 'form-control','placeholder': direction},
-                        'label': ' ',
+                        'attr': {
+                            'class': 'form-control',
+                            'placeholder': 'Dirección',
+                            'empty_data': direction,
+                            'value' : direction
+                        },
+                        'label': ' '
                         }) 
                     }}
                 </div>  
                 <div class="col-md-6 mb-3">
                     {{ form_row(formularioeditarBiblioteca.fecha_fundacion, {
-                        'attr': {'id': 'example-date-input','placeholder': fecha| date('d-m-Y')},
+                        'attr': {
+                            'id': 'example-date-input',
+                            'empty_data': fecha| date('d-m-Y'),
+                            'value' : fecha| date('d-m-Y')
+                            
+                        },
                         'label': 'Fecha de fundación'
                         }) 
                     }}

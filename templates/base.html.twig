@@ -21,11 +21,18 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav">
-                    <li class="nav-item active">
+                    <li class="nav-item">
                         <a class="nav-link" href="/dashboard">Bibliotecas <span class="sr-only">(current)</span></a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{{path('registrar_biblioteca')}}">Añadir bibliotecas</a>
+                    </li>
+                    <li class="nav-item">
+                    {% if app.user %}
+                        <span class="badge bg-danger"><a style="color: white;font-size: 16px;" class="nav-link" href="{{ path('app_logout') }}">Desconectar</a></span>
+                    {% else %}
+                        <span class="badge bg-danger">NO TIENES PERMISOS</span>
+                    {% endif %}
                     </li>
                 </ul>
             </div>

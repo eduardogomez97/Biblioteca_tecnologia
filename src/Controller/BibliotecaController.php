@@ -58,7 +58,7 @@ class BibliotecaController extends AbstractController
         $em->remove($biblioteca);
 
         $em->flush();
-        return $this->redirectToRoute( route: 'home');
+        return $this->redirectToRoute( route: 'inicio');
 
     }
     /**
@@ -71,31 +71,36 @@ class BibliotecaController extends AbstractController
         $formBiblioteca->handleRequest($request);
         $em = $this->getDoctrine()->getManager();
         $biblioteca = $em->getRepository(Biblioteca::class)->find($id);
-        $nombre = $biblioteca->getNombre();
-        $ntrabajadores = $biblioteca->getNumTrabajadores();
-        $direction = $biblioteca->getDireccion();
-        $fecha = $biblioteca->getFechaFundacion();
+        $shownombre = $biblioteca->getNombre();
+        $showntrabajadores = $biblioteca->getNumTrabajadores();
+        $showdirection = $biblioteca->getDireccion();
+        $showfecha = $biblioteca->getFechaFundacion();
         if($formBiblioteca->isSubmitted() && $formBiblioteca->isValid()) {
             if (!$biblioteca) {
                 throw $this->createNotFoundException(
                     'No existe la biblioteca '.$id
                 );
-            }           
+            }
+            $nombre = $formBiblioteca['nombre']->getData();
+            $ntrabajadores = $formBiblioteca['num_trabajadores']->getData();
+            $direction = $formBiblioteca['direccion']->getData();
+            $fecha = $formBiblioteca['fecha_fundacion']->getData();           
             $biblioteca->setNombre($nombre);
             $biblioteca->setNumTrabajadores($ntrabajadores);
             $biblioteca->setDireccion($direction);
             $biblioteca->setFechaFundacion($fecha);
             $em->flush();
+            $this->addFlash(type: 'exito', message: 'Se ha modificado la biblioteca exitoxamente');
             return $this->redirectToRoute('editar_biblioteca', [
                 'id' => $biblioteca->getId()
             ]);
         }
         return $this->render('biblioteca/editarBiblioteca.html.twig', [
             'formularioeditarBiblioteca' =>$formBiblioteca->createView(),
-            'nombre_biblioteca' => $nombre,
-            'ntrabajadores' => $ntrabajadores,
-            'direction' => $direction,
-            'fecha' => $fecha
+            'nombre_biblioteca' => $shownombre,
+            'ntrabajadores' => $showntrabajadores,
+            'direction' => $showdirection,
+            'fecha' => $showfecha
         ]);
         
     }
