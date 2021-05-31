@@ -3,9 +3,11 @@
 namespace App\Controller;
 
 use App\Entity\Biblioteca;
+use App\Entity\Libros;
 use App\Form\EditarBibliotecaType;
 use App\Form\RegistrarBibliotecaType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -39,8 +41,20 @@ class BibliotecaController extends AbstractController
     public function VerBiblioteca($id, Request $request ): Response {
         $em = $this->getDoctrine()->getManager();
         $biblioteca = $em->getRepository(Biblioteca::class)->find($id);
+        $shownombre = $biblioteca->getNombre();
+        $showntrabajadores = $biblioteca->getNumTrabajadores();
+        $showdirection = $biblioteca->getDireccion();
+        $showfecha = $biblioteca->getFechaFundacion();
+        $repository= $em->getRepository(Libros::class);
+        $libros = $repository->findBy(
+            ['bibliotecas_id' => $id]
+        );
         return $this->render('biblioteca/verBiblioteca.html.twig', [
-            'pagination' => $biblioteca
+            'nombre_biblioteca' => $shownombre,
+            'ntrabajadores' => $showntrabajadores,
+            'direction' => $showdirection,
+            'fecha' => $showfecha,
+            'libros' => $libros
         ]);
 
     }

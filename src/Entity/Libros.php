@@ -45,7 +45,7 @@ class Libros
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Biblioteca", inversedBy="libros")
      */
-    private $bibliotecas;
+    private $biblioteca;
 
     public function getId(): ?int
     {

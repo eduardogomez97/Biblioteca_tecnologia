@@ -18,7 +18,7 @@ class LibrosRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Libros::class);
     }
-
+    
     // /**
     //  * @return Libros[] Returns an array of Libros objects
     //  */

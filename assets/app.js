@@ -4,3 +4,4 @@ import 'datatables.net-bs4';
 
 
 $("#bibliotecas").DataTable();
+$("#libros").DataTable();

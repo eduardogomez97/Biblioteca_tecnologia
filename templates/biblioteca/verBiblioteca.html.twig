@@ -3,5 +3,55 @@
 {% block title %}Registro de bilioteca {% endblock %}
 
 {% block body %}
-{{ dump(pagination) }}
+<div>
+    <div class="row">
+        <div class="col-md-12 mb-3">
+            <h1>{{nombre_biblioteca}}</h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12 mb-3">
+            Dirección <span class="form-control">{{direction}}</span>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6 mb-3">
+            Número de trabajadores <span class="form-control">{{ntrabajadores}}</span>
+        </div>
+        <div class="col-md-6 mb-3">
+            Fecha de fundación <span class="form-control">{{fecha |date('d-m-Y')}}</span>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12 mb-3">
+            <h2>Listado de libros de esta biblioteca:</h2>
+        </div>
+        <div class="col-md-12 mb-3">
+            <table id="libros" class="table table-striped table-bordered" style="width:100%">
+                    <thead>
+                        <tr>
+                            <th>Titulo</th>
+                            <th>Autor</th>
+                            <th>Género</th>
+                            <th>Fecha de publicación</th>
+                            <th>Ejemplares disponibles</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for article in libros  %}
+                            <tr {% if loop.index is odd %}class="color"{% endif %}>
+                                <td>{{ article.titulo }}</td>
+                                <td>{{ article.autor}}</td>
+                                <td>{{ article.tipo}}</td>
+                                <td>{{ article.fecha_publicacion | date('d-m-Y')}}</td>
+                                <td>{{ article.ejemplares  }}</td>
+                                <td><a href="verLibro/{{ article.id }}"><img src="/img/look.png" /></a> <a href="editarLibro/{{ article.id }}"><img src="/img/editar.png" /></a> <a onclick="return confirm('¿Estás seguro de que quieres borrar la biblioteca: {{ article.titulo}} ?')" href="borrarLibro/{{ article.id }}"><img src="/img/delete.png" /></a></td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+        </div>
+    </div>
+</div>
 {% endblock %}
