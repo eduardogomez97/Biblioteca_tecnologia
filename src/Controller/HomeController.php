@@ -15,7 +15,7 @@ class HomeController extends AbstractController
     public function index(Request $request): Response
     {
         $em = $this->getDoctrine()->getManager();
-        $query = $em->getRepository(Biblioteca::class)-> BuscarTodasLasBibliotecas() ;
+        $query = $em->getRepository(Biblioteca::class)-> BuscarTodasLasBibliotecas();
         //$linkview = redirecti( route: 'registrar_biblioteca');
         return $this->render('home/index.html.twig', [
             'controller_name' => 'Bienvenido a la Home',

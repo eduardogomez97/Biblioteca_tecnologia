@@ -39,9 +39,10 @@
                         </tr>
                     </thead>
                     <tbody>
+                    {{dump(libros)}}
                         {% for article in libros  %}
                             <tr {% if loop.index is odd %}class="color"{% endif %}>
-                                <td>{{ article.titulo }}</td>
+                                <td>{{ article.titulo}}</td>
                                 <td>{{ article.autor}}</td>
                                 <td>{{ article.tipo}}</td>
                                 <td>{{ article.fecha_publicacion | date('d-m-Y')}}</td>
