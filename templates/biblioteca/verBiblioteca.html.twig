@@ -39,7 +39,6 @@
                         </tr>
                     </thead>
                     <tbody>
-                    {{dump(libros)}}
                         {% for article in libros  %}
                             <tr {% if loop.index is odd %}class="color"{% endif %}>
                                 <td>{{ article.titulo}}</td>

@@ -7,6 +7,7 @@ use App\Entity\Biblioteca;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use Doctrine\ORM\Query;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 /**
  * @method Libros|null find($id, $lockMode = null, $lockVersion = null)
@@ -20,14 +21,13 @@ class LibrosRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Libros::class);
     }
-    public function BuscarTodasLasLibros(int $id) : ?Libros {
+    public function BuscarTodasLasLibros(int $id)  {
         $getlibros = $this->createQueryBuilder('lib')
         ->select('lib.id, lib.titulo, lib.autor, lib.tipo, lib.fecha_publicacion, lib.ejemplares')
         ->where('lib.biblioteca = 1')
         ->getQuery()
-        ->getResult(Query::HYDRATE_ARRAY);
-
-        return $getlibros->getQuery()->getResult(Query::HYDRATE_ARRAY);
+        ->getArrayResult();
+        return $getlibros;
 
     }
     

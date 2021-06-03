@@ -45,7 +45,6 @@ class BibliotecaController extends AbstractController
         $showntrabajadores = $biblioteca->getNumTrabajadores();
         $showdirection = $biblioteca->getDireccion();
         $showfecha = $biblioteca->getFechaFundacion();
-        //$query = $em->getRepository(Libros::class)-> BuscarTodasLasLibros($id) ;
         $query = $em->getRepository(Libros::class)->BuscarTodasLasLibros($id);
         
         return $this->render('biblioteca/verBiblioteca.html.twig', [
