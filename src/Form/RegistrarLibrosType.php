@@ -2,23 +2,26 @@
 
 namespace App\Form;
 
-use App\Entity\Biblioteca;
+use App\Entity\Libros;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
-use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 
-class RegistrarBibliotecaType extends AbstractType
+class RegistrarLibrosType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add(child: 'nombre')
-            ->add(child: 'num_trabajadores', type: IntegerType::class)
-            ->add(child: 'direccion')
-            ->add(child: 'fecha_fundacion', type: DateType::class)
+            ->add('titulo')
+            ->add('autor')
+            ->add('tipo')
+            ->add('fecha_publicacion', type: DateType::class)
+            ->add('ejemplares', type: IntegerType::class)
+            ->add('biblioteca_id', type: IntegerType::class)
             ->add(child: 'Registrar', type: SubmitType::class)
         ;
     }
@@ -26,7 +29,7 @@ class RegistrarBibliotecaType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => Biblioteca::class,
+            'data_class' => Libros::class,
         ]);
     }
 }

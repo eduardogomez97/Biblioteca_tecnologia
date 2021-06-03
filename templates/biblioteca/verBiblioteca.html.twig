@@ -46,7 +46,7 @@
                                 <td>{{ article.tipo}}</td>
                                 <td>{{ article.fecha_publicacion | date('d-m-Y')}}</td>
                                 <td>{{ article.ejemplares  }}</td>
-                                <td><a href="verLibro/{{ article.id }}"><img src="/img/look.png" /></a> <a href="editarLibro/{{ article.id }}"><img src="/img/editar.png" /></a> <a onclick="return confirm('¿Estás seguro de que quieres borrar la biblioteca: {{ article.titulo}} ?')" href="borrarLibro/{{ article.id }}"><img src="/img/delete.png" /></a></td>
+                                <td><a href="/verLibro/{{ article.id }}"><img src="/img/look.png" /></a> <a href="editarLibro/{{ article.id }}"><img src="/img/editar.png" /></a> <a onclick="return confirm('¿Estás seguro de que quieres borrar la biblioteca: {{ article.titulo}} ?')" href="borrarLibro/{{ article.id }}"><img src="/img/delete.png" /></a></td>
                             </tr>
                         {% endfor %}
                     </tbody>

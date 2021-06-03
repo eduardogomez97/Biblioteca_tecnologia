@@ -1,0 +1,59 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} {{controller_name}} {{nombre_biblioteca}} {% endblock %}
+
+{% block body %}
+
+<h1>Añade un libro nuevo a {{nombre_biblioteca}} </h1>
+    {% for message in app.flashes('exito') %}
+        <div class="alert alert-success">
+            {{message}}
+        </div>
+    {% endfor %}
+    <div class="form-group row">
+        {{ form_start(formularioLibro, {
+            'attr': {'class': 'needs-validation'}
+            }) 
+        }}
+            {{ form_errors(formularioLibro) }}
+            <div class="form-row">
+                <div class="col-md-6 mb-3">
+                    {{ form_row(formularioLibro.nombre, {
+                        'attr': {'class': 'form-control','placeholder': 'Nombre de la biblioteca'},
+                        'label': ' ',
+                        }) 
+                    }}
+                </div>  
+                <div class="col-md-6 mb-3">
+                    {{ form_row(formularioLibro.num_trabajadores, {
+                        'attr': {'class': 'form-control','placeholder': 'Número de trabajadores'},
+                        'label': ' ',
+                        }) 
+                    }}
+                </div> 
+            </div>  
+            <div class="form-row">
+                <div class="col-md-6 mb-3">
+                    {{ form_row(formularioLibro.direccion, {
+                        'attr': {'class': 'form-control','placeholder': 'Dirección'},
+                        'label': ' ',
+                        }) 
+                    }}
+                </div>  
+                <div class="col-md-6 mb-3">
+                    {{ form_row(formularioLibro.fecha_fundacion, {
+                        'attr': {'id': 'example-date-input'},
+                        'label': 'Fecha de fundación'
+                        }) 
+                    }}
+                </div>
+            </div>
+
+            {{ form_row(formularioLibro.Registrar, { 
+                'label': 'Registrar', 
+                'attr': {'class': 'btn btn-primary'}
+                }) 
+            }}
+        {{ form_end(formularioLibro) }}
+    </div>
+{% endblock %}
