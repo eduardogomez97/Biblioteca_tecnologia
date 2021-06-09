@@ -24,7 +24,8 @@ class LibrosRepository extends ServiceEntityRepository
     public function BuscarTodasLasLibros(int $id)  {
         $getlibros = $this->createQueryBuilder('lib')
         ->select('lib.id, lib.titulo, lib.autor, lib.tipo, lib.fecha_publicacion, lib.ejemplares')
-        ->where('lib.biblioteca = 1')
+        ->where('lib.biblioteca = :id')
+        ->setParameter(":id", $id)
         ->getQuery()
         ->getArrayResult();
         return $getlibros;

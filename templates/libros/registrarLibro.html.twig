@@ -1,0 +1,77 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} {{controller_name}} {{shownombre}} {% endblock %}
+
+{% block body %}
+
+<h1>Añade un libro nuevo a {{shownombre}} </h1>
+    {% for message in app.flashes('exito') %}
+        <div class="alert alert-success">
+            {{message}}
+        </div>
+    {% endfor %}
+    <div class="form-group row">
+        {{ form_start(formularioLibro, {
+            'attr': {'class': 'needs-validation'}
+            }) 
+        }}
+            {{ form_errors(formularioLibro) }}
+            <div class="form-row">
+                <div class="col-md-6 mb-3">
+                    {{ form_row(formularioLibro.titulo, {
+                        'attr': {'class': 'form-control','placeholder': 'Titulo del libro'},
+                        'label': ' ',
+                        }) 
+                    }}
+                </div>  
+                <div class="col-md-6 mb-3">
+                    {{ form_row(formularioLibro.autor, {
+                        'attr': {'class': 'form-control','placeholder': 'Autor'},
+                        'label': ' ',
+                        }) 
+                    }}
+                </div> 
+            </div>  
+            <div class="form-row">
+                <div class="col-md-6 mb-3">
+                    {{ form_row(formularioLibro.tipo,{
+                        'attr': {'class': 'form-control custom-select','placeholder': 'Dirección'},
+                        'label': ' ',
+                        }) 
+                    }}
+                </div>
+                <div class="col-md-6 mb-3">
+                    {{ form_row(formularioLibro.ejemplares,{
+                        'attr': {'class': 'form-control','placeholder': 'Ejemplares'},
+                        'label': ' ',
+                        }) 
+                    }}
+                </div>   
+            </div>
+            <div class="form-row">
+                <div class="col-md-6 mb-3">
+                    {{ form_row(formularioLibro.fecha_publicacion, {
+                        'attr': {'id': 'example-date-input'},
+                        'label': 'Fecha de publicación'
+                        }) 
+                    }}
+                </div>
+                <div class="col-md-6 mb-3">
+                    {{ form_row(formularioLibro.biblioteca, {
+                        'attr': {
+                            'class': 'form-control',
+                            'empty_data': id_biblioteca,
+                            'value' : id_biblioteca
+                        }
+                        }) 
+                    }}
+                </div>  
+            </div>
+            {{ form_row(formularioLibro.Registrar, { 
+                'label': 'Registrar', 
+                'attr': {'class': 'btn btn-primary'}
+                }) 
+            }}
+        {{ form_end(formularioLibro) }}
+    </div>
+{% endblock %}

@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Libros;
+use App\Entity\Biblioteca;
 use App\Form\RegistrarLibrosType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -52,10 +53,10 @@ class LibrosController extends AbstractController
         $shownombre = $biblioteca->getNombre();
         if($formLibro->isSubmitted() && $formLibro->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            $em->persist($formLibro);
+            $em->persist($libro);
             $em->flush();
             $this->addFlash(type: 'exito', message: 'Se ha registrado el libro exitoxamente');
-            return $this->redirectToRoute( route: 'registrar_libros');
+            return $this->redirectToRoute( route: 'inicio' );
         }
         return $this->render('libros/registrarLibro.html.twig', [
             'controller_name' => 'Registra un nuevo libro en ',

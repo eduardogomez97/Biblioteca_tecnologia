@@ -2,8 +2,12 @@
 
 namespace App\Form;
 
+use App\Entity\Biblioteca;
 use App\Entity\Libros;
+use Doctrine\ORM\EntityRepository;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
@@ -18,10 +22,20 @@ class RegistrarLibrosType extends AbstractType
         $builder
             ->add('titulo')
             ->add('autor')
-            ->add('tipo')
+            ->add('tipo', ChoiceType::class, array(
+                'placeholder'=> 'Género',
+                'choices' => array(
+                    'Aventura' => 'Aventura',
+                    'Ciencia Ficción' => 'Ciencia Ficción',
+                    'Terror' => 'Terror'
+                )
+            ))
             ->add('fecha_publicacion', type: DateType::class)
             ->add('ejemplares', type: IntegerType::class)
-            ->add('biblioteca_id', type: IntegerType::class)
+            ->add('biblioteca', EntityType::class, [
+                'class' => Biblioteca::class,
+                'choice_label' => 'id',
+            ])
             ->add(child: 'Registrar', type: SubmitType::class)
         ;
     }

@@ -38,7 +38,7 @@ class Biblioteca
     private $fecha_fundacion;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Libros", mappedBy="bibliotecas")
+     * @ORM\OneToMany(targetEntity="App\Entity\Libros", mappedBy="biblioteca")
      */
     private $libros;
 
