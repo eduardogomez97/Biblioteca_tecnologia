@@ -38,7 +38,7 @@ class Biblioteca
     private $fecha_fundacion;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Libros", mappedBy="biblioteca")
+     * @ORM\OneToMany(targetEntity="App\Entity\Libros", mappedBy="biblioteca", cascade={"persist", "remove"}, orphanRemoval=true)
      */
     private $libros;
 
