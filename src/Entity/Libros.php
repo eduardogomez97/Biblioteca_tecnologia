@@ -44,6 +44,7 @@ class Libros
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Biblioteca", inversedBy="libros")
+     * @ORM\JoinColumn(name="project_id", referencedColumnName="id", nullable=false)
      */
     private $biblioteca;
 
