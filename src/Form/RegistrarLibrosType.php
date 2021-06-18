@@ -34,7 +34,7 @@ class RegistrarLibrosType extends AbstractType
             ->add('ejemplares', type: IntegerType::class)
             ->add('biblioteca', EntityType::class, [
                 'class' => Biblioteca::class,
-                'choice_label' => 'nombre',
+                'choice_label' => 'id',
             ])
             ->add(child: 'Registrar', type: SubmitType::class)
         ;

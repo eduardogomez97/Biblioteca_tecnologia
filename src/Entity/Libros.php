@@ -111,14 +111,5 @@ class Libros
 
         return $this;
     }
-    public function getBiblioteca(): ?int
-    {
-        return $this->biblioteca;
-    }
-    public function setBiblioteca(int $biblioteca): self
-    {
-        $this->biblioteca = $biblioteca;
 
-        return $this;
-    }
 }
