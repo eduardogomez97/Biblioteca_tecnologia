@@ -53,6 +53,7 @@ class LibrosController extends AbstractController
         $shownombre = $biblioteca->getNombre();
         if($formLibro->isSubmitted() && $formLibro->isValid()) {
             $em = $this->getDoctrine()->getManager();
+            $libro->setBibliotecaId($id_biblioteca);
             $em->persist($libro);
             $em->flush();
             $this->addFlash(type: 'exito', message: 'Se ha registrado el libro exitoxamente');

@@ -44,7 +44,7 @@ class Libros
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Biblioteca", inversedBy="libros")
-     * @ORM\JoinColumn(name="project_id", referencedColumnName="id", nullable=false)
+     * @ORM\JoinColumn(name="biblioteca_id", referencedColumnName="id", nullable=false)
      */
     private $biblioteca;
 
@@ -112,5 +112,15 @@ class Libros
 
         return $this;
     }
+    public function getBibliotecaid(): ?Biblioteca
+    {
+        return $this->biblioteca;
+    }
 
+    public function setBibliotecaid($biblioteca): self
+    {
+        $this->biblioteca = $biblioteca;
+
+        return $this;
+    }
 }

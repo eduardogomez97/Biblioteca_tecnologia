@@ -41,6 +41,7 @@ class BibliotecaController extends AbstractController
     public function VerBiblioteca($id, Request $request ): Response {
         $em = $this->getDoctrine()->getManager();
         $biblioteca = $em->getRepository(Biblioteca::class)->find($id);
+        $showid = $biblioteca->getId();
         $shownombre = $biblioteca->getNombre();
         $showntrabajadores = $biblioteca->getNumTrabajadores();
         $showdirection = $biblioteca->getDireccion();
@@ -52,7 +53,8 @@ class BibliotecaController extends AbstractController
             'ntrabajadores' => $showntrabajadores,
             'direction' => $showdirection,
             'fecha' => $showfecha,
-            'libros' => $query
+            'libros' => $query,
+            'id_biblio' => $showid
         ]);
 
     }

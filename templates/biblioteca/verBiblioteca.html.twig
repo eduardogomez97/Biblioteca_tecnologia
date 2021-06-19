@@ -35,7 +35,7 @@
                             <th>Género</th>
                             <th>Fecha de publicación</th>
                             <th>Ejemplares disponibles</th>
-                            <th></th>
+                            <th style="text-align: center;"><a href="/registrar_libros/{{id_biblio}}"><img src="/img/circulo-plus.png" alt="Añadir nuevo libro" title="Añadir nuevo libro" /></a></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -46,7 +46,7 @@
                                 <td>{{ article.tipo}}</td>
                                 <td>{{ article.fecha_publicacion | date('d-m-Y')}}</td>
                                 <td>{{ article.ejemplares  }}</td>
-                                <td><a href="/verLibro/{{ article.id }}"><img src="/img/look.png" /></a> <a href="editarLibro/{{ article.id }}"><img src="/img/editar.png" /></a> <a onclick="return confirm('¿Estás seguro de que quieres borrar la biblioteca: {{ article.titulo}} ?')" href="borrarLibro/{{ article.id }}"><img src="/img/delete.png" /></a></td>
+                                <td style="text-align: center;"><a href="/verLibro/{{ article.id }}"><img src="/img/look.png" alt="Ver libro" title="Ver libro" /></a> <a href="editarLibro/{{ article.id }}"><img src="/img/editar.png" alt="Editar libro" title="Editar libro" /></a> <a onclick="return confirm('¿Estás seguro de que quieres borrar la biblioteca: {{ article.titulo}} ?')" href="borrarLibro/{{ article.id }}"><img src="/img/delete.png" alt="Eliminar libro" title="Eliminar libro" /></a></td>
                             </tr>
                         {% endfor %}
                     </tbody>

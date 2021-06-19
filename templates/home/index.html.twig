@@ -26,7 +26,7 @@
                                 <td>{{ article.num_trabajadores}}</td>
                                 <td>{{ article.direccion}}</td>
                                 <td>{{ article.fecha_fundacion | date('d-m-Y') }}</td>
-                                <td><a href="verBiblioteca/{{ article.id }}"><img src="/img/look.png" /></a> <a href="editarBiblioteca/{{ article.id }}"><img src="/img/editar.png" /></a> <a onclick="return confirm('¿Estás seguro de que quieres borrar la biblioteca: {{ article.nombre}} ?')" href="borrarBiblioteca/{{ article.id }}"><img src="/img/delete.png" /></a></td>
+                                <td><a href="verBiblioteca/{{ article.id }}"><img src="/img/look.png" alt="Ver biblioteca" title="Ver biblioteca" /></a> <a href="editarBiblioteca/{{ article.id }}"><img src="/img/editar.png" alt="Editar biblioteca" title="Editar biblioteca" /></a> <a onclick="return confirm('¿Estás seguro de que quieres borrar la biblioteca: {{ article.nombre}} ?')" href="borrarBiblioteca/{{ article.id }}"><img src="/img/delete.png" alt="Borrar biblioteca" title="Borrar biblioteca" /></a></td>
                             </tr>
                         {% endfor %}
                     </tbody>
