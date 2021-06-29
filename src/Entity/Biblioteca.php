@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\BibliotecaRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -38,9 +40,17 @@ class Biblioteca
     private $fecha_fundacion;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Libros", mappedBy="biblioteca", cascade={"persist", "remove"}, orphanRemoval=true)
+     * @var ArrayCollection
+     *
+     * @ORM\OneToMany(targetEntity="Libro", mappedBy="biblioteca", cascade={"persist", "remove"}, orphanRemoval=true)
      */
     private $libros;
+
+    public function __construct()
+    {
+        $this->fecha_fundacion = new \DateTime();
+        $this->libros = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -93,5 +103,26 @@ class Biblioteca
         $this->fecha_fundacion = $fecha_fundacion;
 
         return $this;
+    }
+
+    public function getLibros(): Collection
+    {
+        return $this->libros;
+    }
+
+    public function addLibro(Libro $libro)
+    {
+        if (! $this->libros->contains($libro)) {
+            $this->libros->add($libro);
+            $libro->setBiblioteca($this);
+        }
+    }
+
+    public function removeLibro(Libro $libro)
+    {
+        if ($this->libros->contains($libro)) {
+            $this->libros->removeElement($libro);
+            $libro->setBiblioteca(null);
+        }
     }
 }

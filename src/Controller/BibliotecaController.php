@@ -3,7 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Biblioteca;
-use App\Entity\Libros;
+use App\Entity\Libro;
 use App\Form\EditarBibliotecaType;
 use App\Form\RegistrarBibliotecaType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -46,7 +46,7 @@ class BibliotecaController extends AbstractController
         $showntrabajadores = $biblioteca->getNumTrabajadores();
         $showdirection = $biblioteca->getDireccion();
         $showfecha = $biblioteca->getFechaFundacion();
-        $query = $em->getRepository(Libros::class)->BuscarTodasLasLibros($id);
+        $query = $em->getRepository(Libro::class)->BuscarTodasLasLibros($id);
         
         return $this->render('biblioteca/verBiblioteca.html.twig', [
             'nombre_biblioteca' => $shownombre,

@@ -2,8 +2,8 @@
 
 namespace App\Controller;
 
-use App\Entity\Libros;
 use App\Entity\Biblioteca;
+use App\Entity\Libro;
 use App\Form\RegistrarLibrosType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -24,7 +24,7 @@ class LibrosController extends AbstractController
     */
     public function VerBiblioteca($id, Request $request ): Response {
         $em = $this->getDoctrine()->getManager();
-        $libros = $em->getRepository(Libros::class)->find($id);
+        $libros = $em->getRepository(Libro::class)->find($id);
         $showtitulo = $libros->getTitulo();
         $shownautor = $libros->getAutor();
         $showtipo = $libros->getTipo();
@@ -45,7 +45,7 @@ class LibrosController extends AbstractController
     */
     public function index(Request $request, $id_biblioteca): Response
     {
-        $libro = new Libros();
+        $libro = new Libro();
         $formLibro = $this->createForm(RegistrarLibrosType::class, $libro);
         $formLibro->handleRequest($request);
         $em = $this->getDoctrine()->getManager();
@@ -53,7 +53,7 @@ class LibrosController extends AbstractController
         $shownombre = $biblioteca->getNombre();
         if($formLibro->isSubmitted() && $formLibro->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            $libro->setBibliotecaId($id_biblioteca);
+            $libro->setBiblioteca($biblioteca);
             $em->persist($libro);
             $em->flush();
             $this->addFlash(type: 'exito', message: 'Se ha registrado el libro exitoxamente');

@@ -2,7 +2,7 @@
 
 namespace App\Repository;
 
-use App\Entity\Libros;
+use App\Entity\Libro;
 use App\Entity\Biblioteca;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
@@ -10,16 +10,16 @@ use Doctrine\ORM\Query;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
 /**
- * @method Libros|null find($id, $lockMode = null, $lockVersion = null)
- * @method Libros|null findOneBy(array $criteria, array $orderBy = null)
- * @method Libros[]    findAll()
- * @method Libros[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method Libro|null find($id, $lockMode = null, $lockVersion = null)
+ * @method Libro|null findOneBy(array $criteria, array $orderBy = null)
+ * @method Libro[]    findAll()
+ * @method Libro[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class LibrosRepository extends ServiceEntityRepository
+class LibroRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, Libros::class);
+        parent::__construct($registry, Libro::class);
     }
     public function BuscarTodasLasLibros(int $id)  {
         $getlibros = $this->createQueryBuilder('lib')
@@ -33,7 +33,7 @@ class LibrosRepository extends ServiceEntityRepository
     }
     
     // /**
-    //  * @return Libros[] Returns an array of Libros objects
+    //  * @return Libro[] Returns an array of Libro objects
     //  */
     /*
     public function findByExampleField($value)
@@ -50,7 +50,7 @@ class LibrosRepository extends ServiceEntityRepository
     */
 
     /*
-    public function findOneBySomeField($value): ?Libros
+    public function findOneBySomeField($value): ?Libro
     {
         return $this->createQueryBuilder('l')
             ->andWhere('l.exampleField = :val')

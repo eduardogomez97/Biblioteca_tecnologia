@@ -2,13 +2,13 @@
 
 namespace App\Entity;
 
-use App\Repository\LibrosRepository;
+use App\Repository\LibroRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass=LibrosRepository::class)
+ * @ORM\Entity(repositoryClass=LibroRepository::class)
  */
-class Libros
+class Libro
 {
     /**
      * @ORM\Id
@@ -43,7 +43,9 @@ class Libros
     private $ejemplares;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Biblioteca", inversedBy="libros")
+     * @var Biblioteca
+     *
+     * @ORM\ManyToOne(targetEntity="Biblioteca", inversedBy="libros")
      * @ORM\JoinColumn(name="biblioteca_id", referencedColumnName="id", nullable=false)
      */
     private $biblioteca;
@@ -112,15 +114,13 @@ class Libros
 
         return $this;
     }
-    public function getBibliotecaid(): ?Biblioteca
+    public function getBiblioteca(): ?Biblioteca
     {
         return $this->biblioteca;
     }
 
-    public function setBibliotecaid($biblioteca): self
+    public function setBiblioteca($biblioteca): void
     {
         $this->biblioteca = $biblioteca;
-
-        return $this;
     }
 }

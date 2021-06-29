@@ -3,7 +3,7 @@
 namespace App\Form;
 
 use App\Entity\Biblioteca;
-use App\Entity\Libros;
+use App\Entity\Libro;
 use Doctrine\ORM\EntityRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
@@ -20,6 +20,12 @@ class RegistrarLibrosType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
+            ->add('biblioteca', EntityType::class, [
+            'class' => Biblioteca::class,
+            'choice_label' => 'nombre',
+            'disabled' => true,
+            'label' => 'Biblioteca'
+            ])
             ->add('titulo')
             ->add('autor')
             ->add('tipo', ChoiceType::class, array(
@@ -39,7 +45,7 @@ class RegistrarLibrosType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => Libros::class,
+            'data_class' => Libro::class,
         ]);
     }
 }
