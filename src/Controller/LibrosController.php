@@ -12,15 +12,8 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class LibrosController extends AbstractController
 {
-    /*#[Route('/libros', name: 'libros')]
-    public function index(): Response
-    {
-        return $this->render('libros/index.html.twig', [
-            'controller_name' => 'LibrosController',
-        ]);
-    }*/
     /** 
-     * @Route("/verLibro/{id}", name="ver_libro" )
+     * @Route("/verBiblioteca/{id_biblioteca}/verLibro/{id}", name="ver_libro" )
     */
     public function VerBiblioteca($id, Request $request ): Response {
         $em = $this->getDoctrine()->getManager();
@@ -41,7 +34,7 @@ class LibrosController extends AbstractController
 
     }
     /** 
-     * @Route("/registrar_libros/{id_biblioteca}", name="registrar_libros" )
+     * @Route("/verBiblioteca/{id_biblioteca}/registrar_libros", name="registrar_libros" )
     */
     public function index(Request $request, $id_biblioteca): Response
     {
@@ -56,8 +49,10 @@ class LibrosController extends AbstractController
             $libro->setBiblioteca($biblioteca);
             $em->persist($libro);
             $em->flush();
-            $this->addFlash(type: 'exito', message: 'Se ha registrado el libro exitoxamente');
-            return $this->redirectToRoute( route: 'inicio' );
+
+            return $this->redirectToRoute('ver_biblioteca', [
+                'id' => $id_biblioteca
+            ]);
         }
         return $this->render('libros/registrarLibro.html.twig', [
             'controller_name' => 'Registra un nuevo libro en ',
@@ -65,5 +60,67 @@ class LibrosController extends AbstractController
             'id_biblioteca'=> $id_biblioteca,
             'shownombre' => $shownombre
         ]);
+    }
+    /**
+     * @Route("/verBiblioteca/{id_biblioteca}/borrarLibro/{id}", name="borra_libro")
+     */
+    public function borrarLibro($id_biblioteca,$id, Request $request ): Response {
+        $em = $this->getDoctrine()->getManager();
+        $libro = $em->getRepository(Libro::class)->find($id);
+        if (!$libro) {
+            throw $this->createNotFoundException(
+                'No existe el libro '.$id
+            );
+        }
+        $em->remove($libro);
+
+        $em->flush();
+        return $this->redirectToRoute('ver_biblioteca', [
+            'id' => $id_biblioteca
+        ]);
+
+    }
+    /**
+     * @Route("/verBiblioteca/{id_biblioteca}/editarLibro/{id}", name="editar_libro")
+     */
+    public function editarLibro($id, Request $request ): Response {
+        
+        $viewlibro = new Libro();
+        $formLibro = $this->createForm(EditarLibroType::class, $viewlibro);
+        $formLibro->handleRequest($request);
+        $em = $this->getDoctrine()->getManager();
+        $libro = $em->getRepository(Libro::class)->find($id);
+        $shownombre = $libro->getNombre();
+        $showntrabajadores = $libro->getNumTrabajadores();
+        $showdirection = $libro->getDireccion();
+        $showfecha = $libro->getFechaFundacion();
+        if($formLibro->isSubmitted() && $formLibro->isValid()) {
+            if (!$libro) {
+                throw $this->createNotFoundException(
+                    'No existe la biblioteca '.$id
+                );
+            }
+            $nombre = $formLibro['nombre']->getData();
+            $ntrabajadores = $formLibro['num_trabajadores']->getData();
+            $direction = $formLibro['direccion']->getData();
+            $fecha = $formLibro['fecha_fundacion']->getData();           
+            $libro->setNombre($nombre);
+            $libro->setNumTrabajadores($ntrabajadores);
+            $libro->setDireccion($direction);
+            $libro->setFechaFundacion($fecha);
+            $em->flush();
+            $this->addFlash(type: 'exito', message: 'Se ha modificado la biblioteca exitoxamente');
+            return $this->redirectToRoute('editar_libro', [
+                'id' => $libro->getId()
+            ]);
+        }
+        return $this->render('biblioteca/editarBiblioteca.html.twig', [
+            'formularioeditarBiblioteca' =>$formLibro->createView(),
+            'nombre_biblioteca' => $shownombre,
+            'ntrabajadores' => $showntrabajadores,
+            'direction' => $showdirection,
+            'fecha' => $showfecha
+        ]);
+        
     }
 }

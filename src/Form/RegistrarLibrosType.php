@@ -24,7 +24,7 @@ class RegistrarLibrosType extends AbstractType
             'class' => Biblioteca::class,
             'choice_label' => 'nombre',
             'disabled' => true,
-            'label' => 'Biblioteca'
+            'label' => ' '
             ])
             ->add('titulo')
             ->add('autor')
