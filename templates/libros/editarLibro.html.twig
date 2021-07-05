@@ -1,0 +1,84 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} Editar libro {{titulo}} {% endblock %}
+
+{% block body %}
+
+<h1>Añade un libro nuevo a {{titulo}} </h1>
+    {% for message in app.flashes('exito') %}
+        <div class="alert alert-success">
+            {{message}}
+        </div>
+    {% endfor %}
+    <div class="form-group row">
+        {{ form_start(formularioeditarLibro, {
+            'attr': {'class': 'needs-validation'}
+            }) 
+        }}
+        {{ form_errors(formularioeditarLibro) }}
+            <div class="form-row">
+                <div class="col-md-5 mb-3">
+                    {{ form_row(formularioeditarLibro.titulo, {
+                        'attr': {'class': 'form-control','placeholder': 'Titulo del libro'},
+                        'label': 'Titulo',
+                        'placeholder': 'Titulo', 
+                        'empty_data': titulo,
+                        'value' : titulo
+                        }) 
+                    }}
+                </div>
+                <div class="col-md-5 mb-3">
+                    {{ form_row(formularioeditarLibro.autor, {
+                        'attr': {'class': 'form-control','placeholder': 'Autor'},
+                        'label': 'Autor',
+                        'placeholder': 'Autor', 
+                        'empty_data': autor,
+                        'value' : autor
+                        }) 
+                    }}
+                </div> 
+            </div>  
+            <div class="form-row">
+                <div class="col-md-6 mb-3">
+                    {{ form_row(formularioeditarLibro.tipo,{
+                        'attr': {'class': 'form-control custom-select'},
+                        'label': 'Tipo',
+                        'placeholder': 'Tipo', 
+                        'empty_data': tipo,
+                        'value' : tipo
+                        }) 
+                    }}
+                </div>
+                <div class="col-md-6 mb-3">
+                    {{ form_row(formularioeditarLibro.ejemplares,{
+                        'attr': {'class': 'form-control','placeholder': 'Ejemplares'},
+                        'label': 'Ejemplares',
+                        'placeholder': 'Ejemplares', 
+                        'empty_data': ejemplares,
+                        'value' : ejemplares
+                        }) 
+                    }}
+                </div>   
+            </div>
+            <div class="form-row">
+                <div class="col-md-6 mb-3">
+                    {{ form_row(formularioeditarLibro.fecha_publicacion, {
+                        'attr': {'id': 'example-date-input'},
+                        'label': 'Fecha de publicación',
+                        'placeholder': 'Fecha', 
+                        'empty_data': fecha,
+                        'value' : fecha
+                        }) 
+                    }}
+                </div>
+
+            </div>
+            {{ form_row(formularioeditarLibro.Editar, { 
+                'label': 'Editar', 
+                'attr': {'class': 'btn btn-primary'}
+                }) 
+            }}
+        {{ form_end(formularioeditarLibro) }}
+    </div>
+    
+{% endblock %}

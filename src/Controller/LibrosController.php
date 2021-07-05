@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Biblioteca;
 use App\Entity\Libro;
+use App\Form\EditarLibroType;
 use App\Form\RegistrarLibrosType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -83,43 +84,47 @@ class LibrosController extends AbstractController
     /**
      * @Route("/verBiblioteca/{id_biblioteca}/editarLibro/{id}", name="editar_libro")
      */
-    public function editarLibro($id, Request $request ): Response {
+    public function editarLibro($id_biblioteca,$id, Request $request ): Response {
         
         $viewlibro = new Libro();
         $formLibro = $this->createForm(EditarLibroType::class, $viewlibro);
         $formLibro->handleRequest($request);
         $em = $this->getDoctrine()->getManager();
         $libro = $em->getRepository(Libro::class)->find($id);
-        $shownombre = $libro->getNombre();
-        $showntrabajadores = $libro->getNumTrabajadores();
-        $showdirection = $libro->getDireccion();
-        $showfecha = $libro->getFechaFundacion();
+        $showtitulo = $libro->getTitulo();
+        $showautor = $libro->getAutor();
+        $showtipo = $libro->getTipo();
+        $showfecha = $libro->getFechaPublicacion();
+        $showejemplares = $libro->getEjemplares();
         if($formLibro->isSubmitted() && $formLibro->isValid()) {
             if (!$libro) {
                 throw $this->createNotFoundException(
                     'No existe la biblioteca '.$id
                 );
             }
-            $nombre = $formLibro['nombre']->getData();
-            $ntrabajadores = $formLibro['num_trabajadores']->getData();
-            $direction = $formLibro['direccion']->getData();
-            $fecha = $formLibro['fecha_fundacion']->getData();           
-            $libro->setNombre($nombre);
-            $libro->setNumTrabajadores($ntrabajadores);
-            $libro->setDireccion($direction);
-            $libro->setFechaFundacion($fecha);
+            $titulo = $formLibro['titulo']->getData();
+            $autor = $formLibro['autor']->getData();
+            $tipo = $formLibro['tipo']->getData();
+            $fecha = $formLibro['fecha_publicacion']->getData();
+            $ejemplares = $formLibro['ejemplares']->getData();          
+            $libro->setTitulo($titulo);
+            $libro->setAutor($autor);
+            $libro->setTipo($tipo);
+            $libro->setFechaPublicacion($fecha);
+            $libro->setEjemplares($ejemplares);
             $em->flush();
             $this->addFlash(type: 'exito', message: 'Se ha modificado la biblioteca exitoxamente');
-            return $this->redirectToRoute('editar_libro', [
-                'id' => $libro->getId()
+            return $this->redirectToRoute('ver_biblioteca', [
+                'id' => $id_biblioteca
             ]);
         }
-        return $this->render('biblioteca/editarBiblioteca.html.twig', [
-            'formularioeditarBiblioteca' =>$formLibro->createView(),
-            'nombre_biblioteca' => $shownombre,
-            'ntrabajadores' => $showntrabajadores,
-            'direction' => $showdirection,
-            'fecha' => $showfecha
+        return $this->render('libros/editarLibro.html.twig', [
+            'formularioeditarLibro' =>$formLibro->createView(),
+            'titulo' => $showtitulo,
+            'autor' => $showautor,
+            'tipo' => $showtipo,
+            'fecha' => $showfecha,
+            'ejemplares' => $showejemplares,
         ]);
         
     }
