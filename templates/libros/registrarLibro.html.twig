@@ -5,11 +5,7 @@
 {% block body %}
 
 <h1>Añade un libro nuevo a {{shownombre}} </h1>
-    {% for message in app.flashes('exito') %}
-        <div class="alert alert-success">
-            {{message}}
-        </div>
-    {% endfor %}
+   
     <div class="form-group row">
         {{ form_start(formularioLibro, {
             'attr': {'class': 'needs-validation'}
