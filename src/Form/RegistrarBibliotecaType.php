@@ -18,7 +18,13 @@ class RegistrarBibliotecaType extends AbstractType
             ->add(child: 'nombre')
             ->add(child: 'num_trabajadores', type: IntegerType::class)
             ->add(child: 'direccion')
-            ->add(child: 'fecha_fundacion', type: DateType::class)
+            ->add('fecha_fundacion', DateType::class, [ 
+                'widget' => 'single_text',
+                'html5' => false,
+                'empty_data' => '',
+                'attr' => ['class' => 'js-datepicker form-control'],
+                'label' => 'Fecha de publicación:'    
+                ])
             ->add(child: 'Registrar', type: SubmitType::class)
         ;
     }

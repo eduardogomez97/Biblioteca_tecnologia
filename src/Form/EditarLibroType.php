@@ -28,7 +28,12 @@ class EditarLibroType extends AbstractType
                     'Terror' => 'Terror'
                 )
             ))
-            ->add('fecha_publicacion', type: DateType::class)
+            ->add('fecha_publicacion', DateType::class, [ 
+                'widget' => 'single_text',
+                'html5' => false,
+                'attr' => ['class' => 'js-datepicker form-control'],
+
+                ])
             ->add('ejemplares', type: IntegerType::class)
            
             ->add(child: 'Editar', type: SubmitType::class)

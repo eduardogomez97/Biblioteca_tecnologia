@@ -17,14 +17,14 @@
         }}
             {{ form_errors(formularioBiblioteca) }}
             <div class="form-row">
-                <div class="col-md-6 mb-3">
+                <div class="col-md-8 mb-3">
                     {{ form_row(formularioBiblioteca.nombre, {
                         'attr': {'class': 'form-control','placeholder': 'Nombre de la biblioteca'},
                         'label': ' ',
                         }) 
                     }}
                 </div>  
-                <div class="col-md-6 mb-3">
+                <div class="col-md-4 mb-3">
                     {{ form_row(formularioBiblioteca.num_trabajadores, {
                         'attr': {'class': 'form-control','placeholder': 'Número de trabajadores'},
                         'label': ' ',
@@ -33,17 +33,18 @@
                 </div> 
             </div>  
             <div class="form-row">
-                <div class="col-md-6 mb-3">
+                <div class="col-md-12 mb-3">
                     {{ form_row(formularioBiblioteca.direccion, {
                         'attr': {'class': 'form-control','placeholder': 'Dirección'},
                         'label': ' ',
                         }) 
                     }}
                 </div>  
+            </div>
+            <div class="form-row">
                 <div class="col-md-6 mb-3">
                     {{ form_row(formularioBiblioteca.fecha_fundacion, {
-                        'attr': {'id': 'example-date-input'},
-                        'label': 'Fecha de fundación'
+
                         }) 
                     }}
                 </div>

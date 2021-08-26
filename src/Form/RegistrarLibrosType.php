@@ -36,7 +36,12 @@ class RegistrarLibrosType extends AbstractType
                     'Terror' => 'Terror'
                 )
             ))
-            ->add('fecha_publicacion', type: DateType::class)
+            ->add('fecha_publicacion', DateType::class, [ 
+                'widget' => 'single_text',
+                'html5' => false,
+                'attr' => ['class' => 'js-datepicker form-control'],
+                'label' => 'Fecha de publicación:' 
+                ])
             ->add('ejemplares', type: IntegerType::class)
             ->add(child: 'Registrar', type: SubmitType::class)
         ;

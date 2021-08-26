@@ -1,22 +1,67 @@
 @import '~bootstrap/scss/bootstrap';
 
 html#fondologin {
-    background-image: url(/img/portada-log-proyecto-biblioteca.jpg);
-    background-position: center;
-    background-size: cover;
-    
-  }
-  html#fondologin body, html#fondologin body form{
-    background: transparent;
-    height: 100%;
-  }
-  .logincenter {
-    margin-top: 10%;
-  }
-  .card-header.text-center {
-    background-color: #ecc32e;
-  }
-  button.btn.btn-lg.btn-primary {
-    background-color: #ecc32e;
-  }
+  background-image: url(/img/portada-log-proyecto-biblioteca.jpg);
+  background-position: center;
+  background-size: cover;
+  
+}
+html#fondologin body, html#fondologin body form{
+  background: transparent;
+  height: 100%;
+}
+.logincenter {
+  margin-top: 10%;
+}
+.logincenter .card {
+  box-shadow: 0 0 12px 0px #333333;
+}
+.card-header.text-center {
+background-color: #ecc32e;
+}
+button.btn.btn-primary {
+background-color: white;
+color: #ecc32e;
+border-color: #ecc32e;
+}
+button.btn.btn-primary:hover {
+background-color: #ecc32e;
+color: black;
+}
+span.input-group-text {
+background: #ecc32e;
+border-color: #ecc32e;
+}
+html {
+background-image: url(/img/portada-log-proyecto-biblioteca.jpg);
+background-position: center;
+background-size: cover;
+
+}
+html body{
+background: transparent;
+height: 100%;
+}
+.container.mt-5.fondobiblioteca {
+background-color: white;
+box-shadow: 0 0 12px 0px #333333;
+padding: 25px 50px 25px 50px;
+}
+thead {
+background: #ecc32e !important;
+}
+tr.odd {
+background: #ffffff !important;
+}
+tr.even {
+background: #ecc32e66 !important;
+}
+li.paginate_button.page-item a.page-link {
+color: #ecc32e;
+}
+li.paginate_button.page-item.active a.page-link {
+background: #ecc32e !important;
+border-color: #ecc32e !important;
+color: white;
+}
  

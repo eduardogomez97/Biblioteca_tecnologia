@@ -19,7 +19,7 @@
         }}
             {{ form_errors(formularioeditarBiblioteca) }}
             <div class="form-row">
-                <div class="col-md-6 mb-3">
+                <div class="col-md-8 mb-3">
                     {{ form_row(formularioeditarBiblioteca.nombre, {
                         'attr': {
                             'class': 'form-control',
@@ -32,7 +32,7 @@
                         }) 
                     }}
                 </div>  
-                <div class="col-md-6 mb-3">
+                <div class="col-md-4 mb-3">
                     {{ form_row(formularioeditarBiblioteca.num_trabajadores, {
                         'attr': {
                             'class': 'form-control',
@@ -46,7 +46,7 @@
                 </div> 
             </div>  
             <div class="form-row">
-                <div class="col-md-6 mb-3">
+                <div class="col-md-12 mb-3">
                     {{ form_row(formularioeditarBiblioteca.direccion, {
                         'attr': {
                             'class': 'form-control',
@@ -58,20 +58,16 @@
                         }) 
                     }}
                 </div>  
+            </div>
+            <div class="form-row"> 
                 <div class="col-md-6 mb-3">
                     {{ form_row(formularioeditarBiblioteca.fecha_fundacion, {
-                        'attr': {
-                            'id': 'example-date-input',
-                            'empty_data': fecha| date('d-m-Y'),
-                            'value' : fecha| date('d-m-Y')
-                            
-                        },
-                        'label': 'Fecha de fundación'
+                        'value': fecha|date('d-m-Y') 
                         }) 
                     }}
                 </div>
             </div>
-
+        </div>
             {{ form_row(formularioeditarBiblioteca.Editar, { 
                 'label': 'Enviar', 
                 'attr': {'class': 'btn btn-primary'}

@@ -20,7 +20,12 @@ class EditarBibliotecaType extends AbstractType
             ->add(child: 'nombre')
             ->add(child: 'num_trabajadores', type: IntegerType::class)
             ->add(child: 'direccion')
-            ->add(child: 'fecha_fundacion', type: DateType::class)
+            ->add('fecha_fundacion', DateType::class, [ 
+                'widget' => 'single_text',
+                'html5' => false,
+                'attr' => ['class' => 'js-datepicker form-control'],
+
+                ])
             ->add(child: 'Editar', type: SubmitType::class)
         ;
     }
