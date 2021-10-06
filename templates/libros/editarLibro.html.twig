@@ -1,15 +1,10 @@
 {% extends 'base.html.twig' %}
 
-{% block title %} Editar libro {{titulo}} {% endblock %}
+{% block title %} Editar libro {{libros.titulo}} {% endblock %}
 
 {% block body %}
 
 <h1>Editar libro</h1>
-    {% for message in app.flashes('exito') %}
-        <div class="alert alert-success">
-            {{message}}
-        </div>
-    {% endfor %}
     <div class="form-group row">
         {{ form_start(formularioeditarLibro, {
             'attr': {'class': 'needs-validation'}
@@ -22,8 +17,8 @@
                         'attr': {'class': 'form-control','placeholder': 'Titulo del libro'},
                         'label': 'Titulo',
                         'placeholder': 'Titulo', 
-                        'empty_data': titulo,
-                        'value' : titulo
+                        'empty_data': libros.titulo,
+                        'value' : libros.titulo
                         }) 
                     }}
                 </div>
@@ -32,8 +27,8 @@
                         'attr': {'class': 'form-control','placeholder': 'Autor'},
                         'label': 'Autor',
                         'placeholder': 'Autor', 
-                        'empty_data': autor,
-                        'value' : autor
+                        'empty_data': libros.autor,
+                        'value' : libros.autor
                         }) 
                     }}
                 </div> 
@@ -44,8 +39,8 @@
                         'attr': {'class': 'form-control custom-select'},
                         'label': 'Tipo',
                         'placeholder': 'Tipo', 
-                        'empty_data': tipo,
-                        'value' : tipo
+                        'empty_data': libros.tipo,
+                        'value' : libros.tipo
                         }) 
                     }}
                 </div>
@@ -54,8 +49,8 @@
                         'attr': {'class': 'form-control','placeholder': 'Ejemplares'},
                         'label': 'Ejemplares',
                         'placeholder': 'Ejemplares', 
-                        'empty_data': ejemplares,
-                        'value' : ejemplares
+                        'empty_data': libros.ejemplares,
+                        'value' : libros.ejemplares
                         }) 
                     }}
                 </div>   
@@ -63,7 +58,7 @@
             <div class="form-row">
                 <div class="col-md-6 mb-3">
                     {{ form_row(formularioeditarLibro.fecha_publicacion, {
-                        'value': fecha|date('d-m-Y') 
+                        'value': libros.FechaPublicacion|date('Y-m-d') 
                         }) 
                     }}
                 </div>

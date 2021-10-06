@@ -5,7 +5,7 @@
 {% block body %}
 
 <div>
-    <h1>Edita la biblioteca "{{nombre_biblioteca}}"</h1>
+    <h1>Edita la biblioteca "{{ biblioteca.nombre }}"</h1>
 
     {% for message in app.flashes('exito') %}
         <div class="alert alert-success">
@@ -24,8 +24,8 @@
                         'attr': {
                             'class': 'form-control',
                             'placeholder': 'Nombre de la biblioteca', 
-                            'empty_data': nombre_biblioteca,
-                            'value' : nombre_biblioteca
+                            'empty_data': biblioteca.nombre,
+                            'value' : biblioteca.nombre
                         },
                         'label': ' '
                         
@@ -37,8 +37,8 @@
                         'attr': {
                             'class': 'form-control',
                             'placeholder': 'Número de trabajadores',
-                            'empty_data': ntrabajadores,
-                            'value' : ntrabajadores
+                            'empty_data': biblioteca.NumTrabajadores,
+                            'value' : biblioteca.NumTrabajadores
                         },
                         'label': ' '
                         }) 
@@ -51,8 +51,8 @@
                         'attr': {
                             'class': 'form-control',
                             'placeholder': 'Dirección',
-                            'empty_data': direction,
-                            'value' : direction
+                            'empty_data': biblioteca.direccion,
+                            'value' : biblioteca.direccion
                         },
                         'label': ' '
                         }) 
@@ -62,7 +62,7 @@
             <div class="form-row"> 
                 <div class="col-md-6 mb-3">
                     {{ form_row(formularioeditarBiblioteca.fecha_fundacion, {
-                        'value': fecha|date('d-m-Y') 
+                        'value': biblioteca.FechaFundacion|date('Y-m-d') 
                         }) 
                     }}
                 </div>

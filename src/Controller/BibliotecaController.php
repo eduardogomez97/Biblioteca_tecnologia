@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Biblioteca;
 use App\Repository\BibliotecaRepository;
+use App\Repository\LibroRepository;
 use App\Entity\Libro;
 use App\Form\EditarBibliotecaType;
 use App\Form\RegistrarBibliotecaType;
@@ -42,20 +43,11 @@ class BibliotecaController extends AbstractController
     public function VerBiblioteca($id, Request $request ): Response {
         $em = $this->getDoctrine()->getManager();
         $biblioteca = $em->getRepository(Biblioteca::class)->find($id);
-        $showid = $biblioteca->getId();
-        $shownombre = $biblioteca->getNombre();
-        $showntrabajadores = $biblioteca->getNumTrabajadores();
-        $showdirection = $biblioteca->getDireccion();
-        $showfecha = $biblioteca->getFechaFundacion();
-        $query = $em->getRepository(Libro::class)->BibliotecaRepository::BuscarTodasLasLibros($id);
-        
+        $libros = $em->getRepository(Libro::class)->BuscarTodosLosLibros($id);
         return $this->render('biblioteca/verBiblioteca.html.twig', [
-            'nombre_biblioteca' => $shownombre,
-            'ntrabajadores' => $showntrabajadores,
-            'direction' => $showdirection,
-            'fecha' => $showfecha,
-            'libros' => $query,
-            'id_biblio' => $showid
+            'biblioteca' =>  $biblioteca,
+            'libr' => $libros
+
         ]);
 
     }
@@ -86,36 +78,24 @@ class BibliotecaController extends AbstractController
         $formBiblioteca->handleRequest($request);
         $em = $this->getDoctrine()->getManager();
         $biblioteca = $em->getRepository(Biblioteca::class)->find($id);
-        $shownombre = $biblioteca->getNombre();
-        $showntrabajadores = $biblioteca->getNumTrabajadores();
-        $showdirection = $biblioteca->getDireccion();
-        $showfecha = $biblioteca->getFechaFundacion();
         if($formBiblioteca->isSubmitted() && $formBiblioteca->isValid()) {
             if (!$biblioteca) {
                 throw $this->createNotFoundException(
                     'No existe la biblioteca '.$id
                 );
-            }
-            $nombre = $formBiblioteca['nombre']->getData();
-            $ntrabajadores = $formBiblioteca['num_trabajadores']->getData();
-            $direction = $formBiblioteca['direccion']->getData();
-            $fecha = $formBiblioteca['fecha_fundacion']->getData();           
-            $biblioteca->setNombre($nombre);
-            $biblioteca->setNumTrabajadores($ntrabajadores);
-            $biblioteca->setDireccion($direction);
-            $biblioteca->setFechaFundacion($fecha);
+            }     
+            $biblioteca->setNombre($formBiblioteca['nombre']->getData());
+            $biblioteca->setNumTrabajadores($formBiblioteca['num_trabajadores']->getData());
+            $biblioteca->setDireccion($formBiblioteca['direccion']->getData());
+            $biblioteca->setFechaFundacion($formBiblioteca['fecha_fundacion']->getData());
             $em->flush();
-            $this->addFlash(type: 'exito', message: 'Se ha modificado la biblioteca exitoxamente');
             return $this->redirectToRoute('editar_biblioteca', [
                 'id' => $biblioteca->getId()
             ]);
         }
         return $this->render('biblioteca/editarBiblioteca.html.twig', [
             'formularioeditarBiblioteca' =>$formBiblioteca->createView(),
-            'nombre_biblioteca' => $shownombre,
-            'ntrabajadores' => $showntrabajadores,
-            'direction' => $showdirection,
-            'fecha' => $showfecha
+            'biblioteca' => $biblioteca 
         ]);
         
     }

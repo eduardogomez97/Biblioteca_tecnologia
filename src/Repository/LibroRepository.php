@@ -21,14 +21,14 @@ class LibroRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Libro::class);
     }
-    public function BuscarTodasLasLibros(int $id)  {
+    public function BuscarTodosLosLibros(int $id)  {
         $getlibros = $this->createQueryBuilder('lib')
         ->select('lib.id, lib.titulo, lib.autor, lib.tipo, lib.fecha_publicacion, lib.ejemplares')
         ->where('lib.biblioteca = :id')
         ->setParameter(":id", $id)
         ->getQuery()
         ->getArrayResult();
-        return $getlibros;
+        return array($getlibros);
 
     }
     

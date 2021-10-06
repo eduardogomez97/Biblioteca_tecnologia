@@ -6,20 +6,20 @@
 <div>
     <div class="row">
         <div class="col-md-12 mb-3">
-            <h1>{{nombre_biblioteca}}</h1>
+            <h1>{{ biblioteca.nombre }}</h1>
         </div>
     </div>
     <div class="row">
         <div class="col-md-12 mb-3">
-            Dirección <span class="form-control">{{direction}}</span>
+            Dirección <span class="form-control">{{ biblioteca.direccion }}</span>
         </div>
     </div>
     <div class="row">
         <div class="col-md-6 mb-3">
-            Número de trabajadores <span class="form-control">{{ntrabajadores}}</span>
+            Número de trabajadores <span class="form-control">{{ biblioteca.NumTrabajadores }}</span>
         </div>
         <div class="col-md-6 mb-3">
-            Fecha de fundación <span class="form-control">{{fecha |date('d-m-Y')}}</span>
+            Fecha de fundación <span class="form-control">{{ biblioteca.FechaFundacion |date('d-m-Y') }}</span>
         </div>
     </div>
     <div class="row">
@@ -35,19 +35,22 @@
                             <th>Género</th>
                             <th>Fecha de publicación</th>
                             <th>Ejemplares disponibles</th>
-                            <th style="text-align: center;"><a href="{{id_biblio}}/registrar_libros"><img src="/img/circulo-plus.png" alt="Añadir nuevo libro" title="Añadir nuevo libro" /></a></th>
+                            <th style="text-align: center;"><a href="{{biblioteca.id}}/registrar_libros"><img src="/img/circulo-plus.png" alt="Añadir nuevo libro" title="Añadir nuevo libro" /></a></th>
                         </tr>
                     </thead>
                     <tbody>
-                        {% for article in libros  %}
-                            <tr {% if loop.index is odd %}class="color"{% endif %}>
-                                <td>{{ article.titulo}}</td>
-                                <td>{{ article.autor}}</td>
-                                <td>{{ article.tipo}}</td>
-                                <td>{{ article.fecha_publicacion | date('d-m-Y')}}</td>
-                                <td>{{ article.ejemplares  }}</td>
-                                <td style="text-align: center;"><a href="{{id_biblio}}/verLibro/{{ article.id }}"><img src="/img/look.png" alt="Ver libro" title="Ver libro" /></a> <a href="{{id_biblio}}/editarLibro/{{ article.id }}"><img src="/img/editar.png" alt="Editar libro" title="Editar libro" /></a> <a onclick="return confirm('¿Estás seguro de que quieres borrar la biblioteca: {{ article.titulo}} ?')" href="{{id_biblio}}/borrarLibro/{{ article.id }}"><img src="/img/delete.png" alt="Eliminar libro" title="Eliminar libro" /></a></td>
-                            </tr>
+                    
+                        {% for lib in libr %}
+                            {% for li in lib %}
+                                <tr {% if loop.index is odd %}class="color"{% endif %}>
+                                    <td>{{ li.titulo}}</td>
+                                    <td>{{ li.autor}}</td>
+                                    <td>{{ li.tipo}}</td>
+                                    <td>{{ li.fecha_publicacion | date('d-m-Y')}}</td>
+                                    <td>{{ li.ejemplares  }}</td>
+                                    <td style="text-align: center;"><a href="{{biblioteca.id}}/verLibro/{{ li.id }}"><img src="/img/look.png" alt="Ver libro" title="Ver libro" /></a> <a href="{{biblioteca.id}}/editarLibro/{{ li.id }}"><img src="/img/editar.png" alt="Editar libro" title="Editar libro" /></a> <a onclick="return confirm('¿Estás seguro de que quieres borrar la biblioteca: {{ li.titulo}} ?')" href="{{biblioteca.id}}/borrarLibro/{{ li.id }}"><img src="/img/delete.png" alt="Eliminar libro" title="Eliminar libro" /></a></td>
+                                </tr>
+                            {% endfor %}
                         {% endfor %}
                     </tbody>
                 </table>
